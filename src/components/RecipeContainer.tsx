@@ -14,6 +14,8 @@ const tagslist = [
   { label: "Dairy Free", id: "dairy_free" },
   { label: "Comfort Food", id: "comford_food" },
   { label: "Easy", id: "easy" },
+  { label: "Under 1 Hour", id: "under_1_hour" },
+  { label: "Under 30 Minutes", id: "under_30_minutes" },
 ];
 
 const RecipeContainer = () => {
