@@ -21,9 +21,10 @@ export const Banner = styled.div`
   overflow: auto;
   background-color: rgb(236 81 87);
   height: 40px;
+  display: flex;
 `;
 
-export const TextForBanner = styled.div`
+export const TextForBanner = styled.span`
   color: #ffffff;
   display: flex;
   padding: 10px;
@@ -39,75 +40,16 @@ export const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
+  cursor: pointer;
 `;
-// export const Logo = styled.img`
-//     width: 6em;
-//     border:1px solid #131A22;
-//     padding: .2em .1em ;
-//     cursor:pointer;
-//     &:hover{
-//         border:1px solid #ffffff;
-//         border-radius: .2em;
-//     }
-// `
-// export const Text = styled(NavText)`
-//     color:${(props)=>props.color ? props.color :"#ffffff" };
-//     font-size: ${(props)=>props.fontSize ? props.fontSize  : ".9em"};
 
-// `
+export const AutocompleteContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: center;
+`;
 
-// export const Wrapper = styled(NavItemWrapper)`
-//     display: flex;
-//     flex-direction: ${(props)=>props.flexDirection ? props.flexDirection  : "column"};
-//     align-items:  ${(props)=>props.alignItems ? props.alignItems  : "flex-start"};
-//     padding: .1em ;
-//     cursor:pointer;
-//     border:1px solid #131A22;
-//     &:hover{
-//         border:1px solid #ffffff;
-//         border-radius: .2em;
-//     }
-//     @media(max-width:850px){
-//         display: none;
-//     }
-// `
-
-// export const Searchbox = styled.input`
-//     background-color: #ffffff;
-//     padding: .78em;
-//     width: 47%;
-//     border: none;
-//     @media(max-width:850px){
-//        border-radius: .2em;
-//        margin: .3em 0;
-//     }
-// `
-// export const Select = styled.select`
-//     background-color:#ddd;
-//     margin-right: -1.2em;
-//     padding: .72em .5em;
-//     border-radius: .2em 0em 0em .2em;
-//     border: none;
-//     cursor: pointer;
-//     @media(max-width:850px){
-//         display: none;
-//     }
-// `
-// export const SearchIconWrapper = styled.span`
-//     background-color:#fabd60;
-//     color: #131A22;
-//     margin-left: -1em;
-//     border-radius: 0em .2em .2em 0em ;
-//     padding: .32em .5em;
-//     cursor: pointer;
-//     transition: all 250ms ease;
-//     &:hover{
-//         background-color:#ff9900;
-//     }
-//     @media(max-width:850px){
-//         display: none;
-//     }
-// `
-// export const Flag = styled.img`
-//     width:2em;
-// `
+export const AboutContainer = styled.div`
+  margintop: 10px;
+`;

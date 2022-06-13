@@ -30,13 +30,13 @@ export const CardTextDescription = styled.div`
   font-size: 13px;
 `;
 
-export const CardTextTitle = styled.h2`
+export const CardTextTitle = styled.h4`
   margin-top: 0px;
-  font-size: 2rem;
+  font-size: 1rem;
   box-sizing: border-box;
   min-width: 0px;
   line-height: 1.2;
-  margin: 0px;
+  margin: 5px;
   background: linear-gradient(
     110.78deg,
     rgb(118, 230, 80) -1.13%,
@@ -58,27 +58,10 @@ export const CardTextBody = styled.div`
   font-weight: 300;
 `;
 
-export const CardStatWrapper = styled.div`
-  grid-area: stats;
-  display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+export const CardInstructionWrapper = styled.div`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background: rgb(236 81 87);
-`;
-
-export const CardStats = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: white;
-  padding: 10px;
-`;
-
-export const LinkText = styled.a`
-  color: #fff;
-  text-decoration: none;
+  overflow: auto; 
+  color: white; 
 `;

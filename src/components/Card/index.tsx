@@ -3,11 +3,9 @@ import {
   CardImage,
   CardTextWrapper,
   CardTextTitle,
-  // CardTextBody,
-  CardStatWrapper,
-  // CardStats,
-  // LinkText,
   CardTextDescription,
+  CardTextBody,
+  CardInstructionWrapper,
 } from "./CardStyles";
 import Tilt from "react-parallax-tilt";
 import React from "react";
@@ -36,27 +34,29 @@ export const Card = ({
   thumbnail_url,
   yields,
 }: CardData) => {
-  console.log(
-    instructions.map((item: Instructions, key: number) => {
-      return <div> {item.display_text}</div>;
-    })
-  );
 
   return (
     <Tilt>
       <CardWrapper>
-        <CardImage background={thumbnail_url} />
+        {thumbnail_url && <CardImage background={thumbnail_url} />}
         <CardTextWrapper>
-          <CardTextDescription>{description}</CardTextDescription>
-          <CardTextTitle>{name}</CardTextTitle>
-          {/* <CardTextBody>
-            {instructions.map((item: Instructions, key: number) => {
-              return <div> {item.display_text} </div>
-            })}
-          </CardTextBody> */}
+        {name && <CardTextTitle>{name}</CardTextTitle>}
+          <CardTextDescription>{ description && description}</CardTextDescription>
+        
+          {yields && <CardTextDescription> Yields: {yields}</CardTextDescription>} 
+          <CardTextBody>
+          </CardTextBody>
         </CardTextWrapper>
-        <CardStatWrapper>
-        </CardStatWrapper>
+        <CardInstructionWrapper>
+          Instructions: 
+        {
+            instructions && instructions.map((item: Instructions, index: number) => {
+              return (
+                <p key={index}> {item.display_text} </p>
+              )
+            })
+            }
+        </CardInstructionWrapper>
       </CardWrapper>
     </Tilt>
   );
