@@ -1,5 +1,5 @@
 import React from "react"; 
-import { AboutContainer } from "../styles";
+import { AboutContainer } from "./ContainerStyles";
 
 const About: React.FunctionComponent<{}> = () => {
   return (

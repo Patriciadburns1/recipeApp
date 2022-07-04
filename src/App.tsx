@@ -1,6 +1,4 @@
 import React from "react";
-import { hot } from "react-hot-loader/root";
-
 import "./App.css";
 import Main from "./Main";
 
@@ -12,4 +10,4 @@ function App() {
   );
 }
 
-export default hot(App);
+export default App;

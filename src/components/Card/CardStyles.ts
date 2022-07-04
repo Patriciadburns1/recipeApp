@@ -65,3 +65,8 @@ export const CardInstructionWrapper = styled.div`
   overflow: auto; 
   color: white; 
 `;
+
+
+export const LinkWrapper = styled.div`
+    margin-top: 15px; 
+`;

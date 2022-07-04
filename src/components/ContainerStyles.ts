@@ -1,6 +1,4 @@
 import styled from "styled-components";
-// import{ PageText as NavText} from "../helpers/PageText"
-// import{ PageItemWrapper as NavItemWrapper} from "../helpers/ItemWrapper"
 
 export const Container = styled.div`
   width: 100vw;
@@ -51,5 +49,12 @@ export const AutocompleteContainer = styled.div`
 `;
 
 export const AboutContainer = styled.div`
-  margintop: 10px;
+  margin-top: 10px;
+`;
+
+
+export const LoadingContainer = styled.div`
+  margin: auto; 
+  width: 50%; 
+  margin-top: 25%; 
 `;

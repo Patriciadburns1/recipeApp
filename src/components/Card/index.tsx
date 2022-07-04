@@ -6,9 +6,11 @@ import {
   CardTextDescription,
   CardTextBody,
   CardInstructionWrapper,
+  LinkWrapper,
 } from "./CardStyles";
 import Tilt from "react-parallax-tilt";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export interface Instructions {
   appliance: null | string;
@@ -34,28 +36,31 @@ export const Card = ({
   thumbnail_url,
   yields,
 }: CardData) => {
-
   return (
     <Tilt>
       <CardWrapper>
         {thumbnail_url && <CardImage background={thumbnail_url} />}
         <CardTextWrapper>
-        {name && <CardTextTitle>{name}</CardTextTitle>}
-          <CardTextDescription>{ description && description}</CardTextDescription>
-        
-          {yields && <CardTextDescription> Yields: {yields}</CardTextDescription>} 
-          <CardTextBody>
-          </CardTextBody>
+          {name && <CardTextTitle>{name}</CardTextTitle>}
+          <CardTextDescription>
+            {description && description}
+          </CardTextDescription>
+
+          {yields && (
+            <CardTextDescription> Yields: {yields}</CardTextDescription>
+          )}
+          <CardTextBody></CardTextBody>
         </CardTextWrapper>
         <CardInstructionWrapper>
-          Instructions: 
-        {
-            instructions && instructions.map((item: Instructions, index: number) => {
-              return (
-                <p key={index}> {item.display_text} </p>
-              )
-            })
-            }
+          <LinkWrapper>
+            <Link
+              to="/instructions"
+              state={{ name: name, instructions: instructions }}
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Go to Full Recipe
+            </Link>
+          </LinkWrapper>
         </CardInstructionWrapper>
       </CardWrapper>
     </Tilt>

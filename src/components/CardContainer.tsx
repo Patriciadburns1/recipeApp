@@ -1,15 +1,14 @@
 import React from "react";
-import { Card, CardData, Instructions } from "./Card";
-import { Container } from "../styles";
+import { Card, CardData } from "./Card";
+import { Container } from "./ContainerStyles";
+import Loading from "./Loading";
 
-const CardContainer: React.FunctionComponent<{ data: CardData[] }> = ({
-  data=[],
+const CardContainer: React.FunctionComponent<{
+  data: CardData[],
+}> = ({
+  data = [], 
 }) => {
-  if (!data.length) {
-    return (
-      <div> No Recipes found! Search again for something in the database</div>
-    );
-  }
+
   return (
     <Container>
       {data.map((item: CardData, index) => {

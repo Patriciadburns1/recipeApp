@@ -1,11 +1,12 @@
 import React from "react";
 import CardContainer from "./CardContainer";
 import axios from "axios";
-import { AutocompleteContainer, Button } from "../styles";
+import { AutocompleteContainer, Button } from "./ContainerStyles";
 import { Autocomplete, TextField } from "@mui/material";
+import Loading from "./Loading";
 
 const headers = {
-  "X-RapidAPI-Key": "ajUCuqnh5smshAkbBSVtBtIs2vuap1BPqKijsnmQn2wKnrHa1S",
+  'X-RapidAPI-Key': 'ajUCuqnh5smshAkbBSVtBtIs2vuap1BPqKijsnmQn2wKnrHa1S',
   "X-RapidAPI-Host": "tasty.p.rapidapi.com",
 };
 const method = "GET";
@@ -21,6 +22,7 @@ const tagslist = [
 const RecipeContainer = () => {
   const [searchText, setSearchText] = React.useState("");
   const [data, setData] = React.useState([]);
+  const [error, setError] = React.useState(false)
 
   React.useEffect(() => {
     const options = {
@@ -31,6 +33,7 @@ const RecipeContainer = () => {
     };
 
     if (!searchText) {
+      console.log("inside api request");
       axios
         .request(options)
         .then((response) => {
@@ -55,16 +58,17 @@ const RecipeContainer = () => {
           setData(recipes);
         })
         .catch((error) => {
+          setError(true)
           console.error(error);
         });
     }
   }, [searchText]);
 
   const setValue = (searchText: string) => {
-    const searchValue = tagslist.find((item) => {
+    tagslist.find((item) => {
       if (item.label.includes(searchText)) {
         setSearchText(item.id);
-        return;
+        return item;
       }
     });
   };
@@ -101,11 +105,21 @@ const RecipeContainer = () => {
           setData(recipes);
         })
         .catch((error) => {
+          setError(true)
           console.error(error);
         });
     }
   }, [searchText]);
-
+  if (!data.length && error) {
+    return (
+      <div> No Recipes found! Search again for something in the database</div>
+    );
+  }
+  if (!data.length && !error) {
+    return (
+      <Loading/>
+    )
+  }
   return (
     <>
       <AutocompleteContainer>
@@ -120,10 +134,10 @@ const RecipeContainer = () => {
           renderInput={(params) => (
             <TextField {...params} label="Recipe Tags" />
           )}
-        />
+        /> 
         <Button onClick={executeSearch}> Search Recipes </Button>
       </AutocompleteContainer>
-      <CardContainer data={data} />
+      {data.length && <CardContainer data={data}/> } 
     </>
   );
 };
