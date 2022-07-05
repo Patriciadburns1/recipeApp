@@ -6,7 +6,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import Loading from "./Loading";
 
 const headers = {
-  'X-RapidAPI-Key': 'ajUCuqnh5smshAkbBSVtBtIs2vuap1BPqKijsnmQn2wKnrHa1S',
+  "X-RapidAPI-Key": "ajUCuqnh5smshAkbBSVtBtIs2vuap1BPqKijsnmQn2wKnrHa1S",
   "X-RapidAPI-Host": "tasty.p.rapidapi.com",
 };
 const method = "GET";
@@ -22,7 +22,8 @@ const tagslist = [
 const RecipeContainer = () => {
   const [searchText, setSearchText] = React.useState("");
   const [data, setData] = React.useState([]);
-  const [error, setError] = React.useState(false)
+  const [error, setError] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const options = {
@@ -31,9 +32,7 @@ const RecipeContainer = () => {
       params: { from: "0", size: "20", tags: "under_30_minutes" },
       headers: headers,
     };
-
     if (!searchText) {
-      console.log("inside api request");
       axios
         .request(options)
         .then((response) => {
@@ -55,10 +54,11 @@ const RecipeContainer = () => {
               };
             }
           );
+          setLoading(false);
           setData(recipes);
         })
         .catch((error) => {
-          setError(true)
+          setError(true);
           console.error(error);
         });
     }
@@ -74,52 +74,53 @@ const RecipeContainer = () => {
   };
 
   const executeSearch = React.useCallback(() => {
-    if (searchText.length > 2) {
-      const options = {
-        method: "GET",
-        url: "https://tasty.p.rapidapi.com/recipes/list",
-        params: { from: "0", size: "20", tags: searchText },
-        headers: headers,
-      };
-      axios
-        .request(options)
-        .then((response) => {
-          const data = response?.data.results;
-          const recipes = data.map(
-            (item: {
-              name: string;
-              description: string;
-              instructions: string;
-              thumbnail_url: string;
-              yields: string;
-            }) => {
-              return {
-                name: item.name,
-                description: item.description,
-                instructions: item.instructions,
-                thumbnail_url: item.thumbnail_url,
-                yields: item.yields,
-              };
-            }
-          );
-          setData(recipes);
-        })
-        .catch((error) => {
-          setError(true)
-          console.error(error);
-        });
-    }
-  }, [searchText]);
+    setLoading(true);
+    const options = {
+      method: "GET",
+      url: "https://tasty.p.rapidapi.com/recipes/list",
+      params: { from: "0", size: "20", tags: searchText },
+      headers: headers,
+    };
+    axios
+      .request(options)
+      .then((response) => {
+        const data = response?.data.results;
+        const recipes = data.map(
+          (item: {
+            name: string;
+            description: string;
+            instructions: string;
+            thumbnail_url: string;
+            yields: string;
+          }) => {
+            return {
+              name: item.name,
+              description: item.description,
+              instructions: item.instructions,
+              thumbnail_url: item.thumbnail_url,
+              yields: item.yields,
+            };
+          }
+        );
+        setLoading(false);
+        setData(recipes);
+      })
+      .catch((error) => {
+        setError(true);
+        console.error(error);
+      });
+  }, []);
+
   if (!data.length && error) {
     return (
       <div> No Recipes found! Search again for something in the database</div>
     );
   }
-  if (!data.length && !error) {
-    return (
-      <Loading/>
-    )
+
+  if (loading) {
+    return <Loading />;
   }
+
   return (
     <>
       <AutocompleteContainer>
@@ -134,10 +135,10 @@ const RecipeContainer = () => {
           renderInput={(params) => (
             <TextField {...params} label="Recipe Tags" />
           )}
-        /> 
+        />
         <Button onClick={executeSearch}> Search Recipes </Button>
       </AutocompleteContainer>
-      {data.length && <CardContainer data={data}/> } 
+      {data.length && <CardContainer data={data} />}
     </>
   );
 };

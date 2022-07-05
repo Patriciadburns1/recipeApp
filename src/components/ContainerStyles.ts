@@ -49,12 +49,14 @@ export const AutocompleteContainer = styled.div`
 `;
 
 export const AboutContainer = styled.div`
-  margin-top: 10px;
+  margin: auto;
+  width: 50%;
+  margin-top: 15%;
+  color: rgb(236 81 87); 
 `;
 
-
 export const LoadingContainer = styled.div`
-  margin: auto; 
-  width: 50%; 
-  margin-top: 25%; 
+  margin: auto;
+  width: 50%;
+  margin-top: 25%;
 `;

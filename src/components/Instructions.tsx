@@ -1,6 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { InstructionContainer, InstructionName } from './InstructionStyles'; 
+import { Link, useLocation } from "react-router-dom";
+import {
+  InstructionContainer,
+  InstructionItem,
+  InstructionName,
+  InstructionTitle,
+} from "./InstructionStyles";
 
 interface Instructions {
   appliance: null | string;
@@ -20,20 +25,31 @@ interface data {
 const Instructions: React.FunctionComponent = ({}) => {
   const location = useLocation();
   const { instructions, name } = location.state as data;
-  console.log(location.state);
+  if (!instructions) {
+    return (
+      <div>
+        Apologies it's unclear what happened please go back to the Homempage
+        <Link to="/"> Home </Link>
+      </div>
+    );
+  }
+
   return (
     <InstructionContainer>
-        <InstructionName>{name && name}     </InstructionName>
-      <div> 
-      Instructions:
+      <InstructionName>{name && name} </InstructionName>
+      <div>
+        <InstructionTitle>Instructions</InstructionTitle>:
         {instructions &&
           instructions.map((item: Instructions, index: number) => {
-            return <p key={index}> {item.display_text} </p>;
+            const num = index + 1;
+            const number = num.toString();
+            return (
+              <InstructionItem key={index}>
+                {number}. {item.display_text}
+              </InstructionItem>
+            );
           })}
-
-        </div>
-
-  
+      </div>
     </InstructionContainer>
   );
 };

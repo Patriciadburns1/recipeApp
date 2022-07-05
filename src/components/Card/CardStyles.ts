@@ -23,6 +23,7 @@ export const CardImage = styled.div<{ background: string }>`
 export const CardTextWrapper = styled.div`
   grid-area: text;
   margin: 25px;
+  overflow: auto;
 `;
 
 export const CardTextDescription = styled.div`
