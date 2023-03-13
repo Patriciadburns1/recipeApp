@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
-import About from "./components/About";
-import Instructions from "./components/Instructions";
+import About from "About";
+import Instructions from "components/Instructions";
 import RecipeContainer from "./components/RecipeContainer";
 import { Banner, TextForBanner } from "./components/ContainerStyles";
 
@@ -24,7 +24,7 @@ const Main = () => {
         </Link>
       </Banner>
       <Routes>
-        <Route path="/" element={<RecipeContainer />}/>
+        <Route path="/" element={<RecipeContainer />} />
         <Route path="/instructions" element={<Instructions />} />
         <Route path="about" element={<About />} />
       </Routes>

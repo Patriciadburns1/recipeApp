@@ -6,6 +6,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import Loading from "./Loading";
 
 const headers = {
+  //https://rapidapi.com/apidojo/api/tasty
   "X-RapidAPI-Key": "ajUCuqnh5smshAkbBSVtBtIs2vuap1BPqKijsnmQn2wKnrHa1S",
   "X-RapidAPI-Host": "tasty.p.rapidapi.com",
 };
@@ -17,10 +18,15 @@ const tagslist = [
   { label: "Easy", id: "easy" },
   { label: "Under 1 Hour", id: "under_1_hour" },
   { label: "Under 30 Minutes", id: "under_30_minutes" },
+  { label: "Under 30 Minutes", id: "under_45_minutes" },
+  { label: "Vegetarian", id: "vegetarian" },
+  { label: "Appetizers", id: "appetizers" },
 ];
 
 const RecipeContainer = () => {
-  const [searchText, setSearchText] = React.useState("");
+  const [searchText, setSearchText] = React.useState<string | undefined>(
+    undefined
+  );
   const [data, setData] = React.useState([]);
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
@@ -62,15 +68,26 @@ const RecipeContainer = () => {
           console.error(error);
         });
     }
-  }, [searchText]);
+  }, []);
 
-  const setValue = (searchText: string) => {
-    tagslist.find((item) => {
-      if (item.label.includes(searchText)) {
-        setSearchText(item.id);
-        return item;
-      }
-    });
+  const onChangeHandler = (
+    _event: any,
+    search: { id: string; label: string }
+  ) => {
+    if (searchText === search.id) {
+      return;
+    }
+    if (search.id) {
+      let searchValue = "";
+      tagslist.find((item) => {
+        if (item.label === search.label) {
+          searchValue = item?.id;
+          return searchValue;
+        }
+      });
+      setSearchText(searchValue);
+      executeSearch();
+    }
   };
 
   const executeSearch = React.useCallback(() => {
@@ -109,24 +126,40 @@ const RecipeContainer = () => {
         setError(true);
         console.error(error);
       });
-  }, []);
-
-  if (!data.length && error) {
-    return (
-      <div> No Recipes found! Search again for something in the database</div>
-    );
-  }
+  }, [searchText]);
 
   if (loading) {
     return <Loading />;
+  }
+
+  if (!data.length || error) {
+    return (
+      <>
+        <div> No Recipes found! Search again for something in the database</div>
+        <AutocompleteContainer>
+          <Autocomplete
+            onChange={(event: any, newValue: any) => {
+              onChangeHandler(event, newValue);
+            }}
+            disablePortal
+            id="combo-box-demo"
+            options={tagslist}
+            sx={{ width: 300 }}
+            renderInput={(params) => (
+              <TextField {...params} label="Recipe Tags" />
+            )}
+          />
+        </AutocompleteContainer>
+      </>
+    );
   }
 
   return (
     <>
       <AutocompleteContainer>
         <Autocomplete
-          onInputChange={(event, newInputValue) => {
-            setValue(newInputValue);
+          onChange={(event: any, newValue: any) => {
+            onChangeHandler(event, newValue);
           }}
           disablePortal
           id="combo-box-demo"
@@ -136,9 +169,8 @@ const RecipeContainer = () => {
             <TextField {...params} label="Recipe Tags" />
           )}
         />
-        <Button onClick={executeSearch}> Search Recipes </Button>
       </AutocompleteContainer>
-      {data.length && <CardContainer data={data} />}
+      {data && <CardContainer data={data} />}
     </>
   );
 };

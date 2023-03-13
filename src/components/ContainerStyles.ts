@@ -49,6 +49,7 @@ export const AutocompleteContainer = styled.div`
 `;
 
 export const AboutContainer = styled.div`
+  text-align: center;
   margin: auto;
   width: 50%;
   margin-top: 15%;

@@ -7,7 +7,7 @@ import {
   CardTextBody,
   CardInstructionWrapper,
   LinkWrapper,
-} from "./CardStyles";
+} from "components/Card/CardStyles";
 import Tilt from "react-parallax-tilt";
 import React from "react";
 import { Link } from "react-router-dom";

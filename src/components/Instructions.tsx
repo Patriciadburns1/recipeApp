@@ -5,7 +5,7 @@ import {
   InstructionItem,
   InstructionName,
   InstructionTitle,
-} from "./InstructionStyles";
+} from "components/InstructionStyles";
 
 interface Instructions {
   appliance: null | string;
@@ -25,6 +25,7 @@ interface data {
 const Instructions: React.FunctionComponent = ({}) => {
   const location = useLocation();
   const { instructions, name } = location.state as data;
+
   if (!instructions) {
     return (
       <div>

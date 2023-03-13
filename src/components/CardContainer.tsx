@@ -1,13 +1,10 @@
 import React from "react";
-import { Card, CardData } from "./Card";
-import { Container } from "./ContainerStyles";
-import Loading from "./Loading";
+import { Card, CardData } from "components/Card";
+import { Container } from "components/ContainerStyles";
 
 const CardContainer: React.FunctionComponent<{
-  data: CardData[],
-}> = ({
-  data = [], 
-}) => {
+  data: CardData[];
+}> = ({ data = [] }) => {
 
   return (
     <Container>
