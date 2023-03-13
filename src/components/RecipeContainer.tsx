@@ -19,7 +19,6 @@ const tagslist = [
   { label: "Under 1 Hour", id: "under_1_hour" },
   { label: "Under 30 Minutes", id: "under_30_minutes" },
   { label: "Under 45 Minutes", id: "under_45_minutes" },
-  { label: "Vegetarian", id: "vegetarian" },
   { label: "Appetizers", id: "appetizers" },
 ];
 
